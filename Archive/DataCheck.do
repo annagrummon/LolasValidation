@@ -1,5 +1,7 @@
 *Check Screener
 
+*Adding a note to test fetch/pull for RA guide.
+
 cd "$Data/RoboData"
 
 /*
