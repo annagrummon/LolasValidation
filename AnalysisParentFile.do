@@ -20,7 +20,8 @@ else if "`c(username)'"=="" | "`c(username)'" == ""  {
 }
 
 *Anna Claire
-else if "`c(username)'"=="" | "`c(username)'" == ""  {
+else if "`c(username)'"=="act3242"  {
+	global Code "\\Client\C$\Users\annaclairetucker\Desktop\LolasValidation"
 	
 }
 
