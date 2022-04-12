@@ -15,8 +15,8 @@ if "`c(username)'"=="anngrummon" | "`c(username)'" == "annagrummon"  {
 //to find your username, type the following in yoru command line: display "`c(username)'"
 
 *Violet	
-else if "`c(username)'"=="" | "`c(username)'" == ""  {
-	
+else if "`c(username)'"=="violetn"  {
+	global Code "\\Client\C$\Users\violetnoe\Desktop\LolasValidation"
 }
 
 *Anna Claire
