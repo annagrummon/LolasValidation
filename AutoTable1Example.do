@@ -48,12 +48,10 @@ codebook *
 *Export to Excel
 ******************
 
-*Remove the output file 
-
-*Remove the Sample Characteristics output file
+*Remove the output file. Include "capture" so the command runs even if this file doesn't exist. 
 	capture rm "$Results/AutoTable1.xlsx"
 		
-*Set filename for Sample Characteristics table
+*Set filename for our Sample Characteristics table
 	putexcel set "$Results/AutoTable1.xlsx" , replace
 	
 *Add column headers. Make them bold
@@ -65,7 +63,7 @@ codebook *
 	*Example 1: MPG
 	putexcel A2 = ("Gas mileage in MPG, mean (SD)")
 
-	*To do: finish rest
+	*To do: finish rest of row labels
 	
 	
 *Add statistics to table
@@ -96,5 +94,5 @@ codebook *
 		putexcel C9 = matrix(rep78_n_5),  nformat("(##)")
 		
 	
-	*To do: Finish foreign/domestic 
+	*To do: Finish adding foreign/domestic statistics 
 	
