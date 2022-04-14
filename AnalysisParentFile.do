@@ -6,7 +6,7 @@
 
 *Anna
 if "`c(username)'"=="anngrummon" | "`c(username)'" == "annagrummon"  {
-	global Results "/Users/annagrummon/Harvard University/Harvard University/Harvard University/Results"	
+	global Results "/Users/annagrummon/Dropbox/ongoing projects/LolasValidationStudy/Results"	
 	global Code "/Users/annagrummon/Dropbox/ongoing projects/LolasValidation-Code"
 	global Data "/Users/annagrummon/Dropbox/ongoing projects/LolasValidationStudy/Data"
 	global Overall "/Users/annagrummon/Harvard University/Harvard University/Harvard University" 
