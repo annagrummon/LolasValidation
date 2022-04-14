@@ -17,6 +17,8 @@ if "`c(username)'"=="anngrummon" | "`c(username)'" == "annagrummon"  {
 *Violet	
 else if "`c(username)'"=="violetn"  {
 	global Code "\\Client\C$\Users\violetnoe\Desktop\LolasValidation"
+	global Data "\\Client\C$\Users\violetnoe\Dropbox\LolasValidationStudy\Data"
+	global Results "\\Client\C$\Users\violetnoe\Dropbox\LolasValidationStudy\Results"
 }
 
 *Anna Claire
