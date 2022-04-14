@@ -82,8 +82,11 @@ replace exclude_sens = 1 if PID==31
 replace exclude_sens_why = "Data accuracy concerns due to technical difficulties for participant" if PID==31
 
 *TK double check after RAs reply re: start date of out of stock
-replace exclud_sens = 1 if PID==40
-replace exclude_sense_why = "Out of stock item prior to recording these" if PID==40
+replace exclude_sens = 1 if PID==40
+replace exclude_sens_why = "Out of stock item prior to recording these" if PID==40
+
+replace exclude_sens = 1 if inlist(PID, 49, 50, 51, 52, 58, 28, 38, 60, 63, 69, 90)
+replace exclude_sens_why = "Out of stock item prior to recording these" if inlist(PID, 49, 50, 51, 52, 58, 28, 38, 60, 63, 69, 90)
 
 *Save the data
 cd "$Data"
