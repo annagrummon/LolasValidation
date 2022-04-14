@@ -3,7 +3,8 @@
 ************************************
 
 *Bring in data
-*Anna
+*Anna's file paths
+//NOTE: If bringing in these data from another machine, you will need to alter the file path specified in the cd statement here. 
 cd "/Users/annagrummon/Harvard University/Harvard University/Harvard University/ParticipantTracking"
 import excel using "Lola's Validation Screener_Including Enrolled Participants_3.23.xlsx", sheet("Sheet0") firstrow clear
 
