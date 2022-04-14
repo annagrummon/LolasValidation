@@ -7,7 +7,7 @@
 *Anna
 if "`c(username)'"=="anngrummon" | "`c(username)'" == "annagrummon"  {
 	global Results "/Users/annagrummon/Harvard University/Harvard University/Harvard University/Results"	
-	global Code "/Users/annagrummon/Dropbox/ongoing projects/LolasValidation"
+	global Code "/Users/annagrummon/Dropbox/ongoing projects/LolasValidation-Code"
 	global Data "/Users/annagrummon/Harvard University/Harvard University/Harvard University/Data"	
 	global Overall "/Users/annagrummon/Harvard University/Harvard University/Harvard University" 
 }
@@ -25,10 +25,6 @@ else if "`c(username)'"=="act3242"  {
 	
 }
 
-*Veronica
-else if "`c(username)'"=="" | "`c(username)'" == ""  {
-	
-}
 
 
 *****************
@@ -36,7 +32,7 @@ else if "`c(username)'"=="" | "`c(username)'" == ""  {
 *****************
 
 *Run all data prep files
-	do "$Code/PrepScreenerEnrolled.do"
+	*do "$Code/PrepScreenerEnrolled.do" //only need to run 1x. Use cleaned data without identifiers for remainder of project. 
 
 	do "$Code/PrepInitialLolasPurchases.do"
 

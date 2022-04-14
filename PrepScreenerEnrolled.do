@@ -3,6 +3,7 @@
 ************************************
 
 *Bring in data
+*Anna
 cd "/Users/annagrummon/Harvard University/Harvard University/Harvard University/ParticipantTracking"
 import excel using "Lola's Validation Screener_Including Enrolled Participants_3.23.xlsx", sheet("Sheet0") firstrow clear
 
@@ -99,7 +100,7 @@ foreach hhsize in 1 2 3 4 5 6 7 8 10 15 {
 	capture	replace fpl200 = . if fpl_`hhsize'_num==. & hhsize_num == `hhsize'
 }
 
-*Drop variables we don't need
+*Drop additional variables we don't need
 drop participant_YN
 drop Removed_YN
 drop fpl_1_num-fpl_15_num
