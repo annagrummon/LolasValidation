@@ -1,5 +1,7 @@
 /*Merge Lola's Purchase Data with Food Categories*/
 
+
+
 *Start by bringing in the purchase data
 cd "$Data/IntermediateData"
 use "LolasPurchases_all.dta", clear
@@ -16,7 +18,6 @@ merge m:1 DeptAisleShelf Product using "$Data/IntermediateData/LolasFoods_handco
 drop _merge 
 
 *Clean up
-
 replace Dairy=1 if Product=="ChobaniÂ® Non-Fat Greek Yogurt, Plain 32oz"
 replace Dairy=1 if Product=="Greek Gods Honey Greek Yogurt, 32 Oz. Tub"
 replace Sweets=1 if Product=="Kraft Trios Snackfulls Colby And Monterey Jack, Semisweet Chocolate And Banana Chips, 2.25 Oz Package"

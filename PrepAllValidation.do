@@ -11,10 +11,6 @@ drop if id==""
 *Merge survey data with Lola's purchase data using id variable
 merge 1:1 id using "$Data/IntermediateData/LolasPurchases_all_clean.dta"
 
-*TK - Carmen to help with _merge==1
-*We know 42 is missing Lola's data so that is expected
-*Why PID 1 and 4?
-
 *Clean up _merge==2 people - in Lola's only. The following ids are from PIDxxs in Lola's Qualtrics surveys - i.e., to drop
 foreach id in vtmngmlk  itxsfbzq vwoyg2h1 ddtfqvkt yge8na8b mttcdi5u op0jvidt f68c17g3 {
 	drop if _merge==2 & id=="`id'"
@@ -24,20 +20,13 @@ drop if _merge==2 & id=="yh2sn2cn" //no visits in Participant Tracker scheduled 
 
 rename _merge mergeSurveyLolas
 
+
 *Merge data with Walmart purchase data using PID variable
 merge 1:1 PID using "$Data/IntermediateData/WalmartPurchases_clean.dta"
 rename _merge mergeSurveyWalmart
 
-*TK TK two PIDs are in Walmart only - 25 and 146. These are known missing from surveys, follow up with RA's as to why.
-**TK TK 1 PID is missing in Walmart! What is this one??
+//*Two PIDs are in Walmart only - 25 and 146. These are known missing from surveys, it is not clear why these Ps have purchahse data but did not complete surveys. But the purchase data can still be analyzed. 
 
-/*Merge with Checklist 
-merge 1:1 PID using "$Data/IntermediateData/Checklist.dta"
-drop _merge
-*/
-
-*TK - why missing PID now?
-drop if PID==.
 
 *Merge with Screener + Enrollment Data
 merge 1:1 PID using "Screener_EnrolledOnly.dta"
