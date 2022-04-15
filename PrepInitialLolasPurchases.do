@@ -2,6 +2,17 @@
 *Data Prep: Lola's Purchases (not yet categorized)
 ************************************
 
+
+
+*Import data from participant with missing data and save as .dta
+import excel "/Users/annagrummon/Dropbox/ongoing projects/LolasValidationStudy/Data/Lolas/Lolas Data for Missing Participant.xlsx", sheet("Sheet1") firstrow clear
+
+gen id = "placeholder"
+
+save "$Data/IntermediateData/LolasPurchases_PID42_coded.dta", replace
+
+
+
 *Import data
 *Most recent version of Gorilla:
 foreach x in 1 2 {
