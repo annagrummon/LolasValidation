@@ -102,7 +102,7 @@ destring PID, replace
 
 *Fill in missing id's (not passed from Gorilla)
 replace id ="4zhgn2uj" if PID==8 & Store=="Lolas" //from Carmen's linking document "Missing Gorilla id linked to PID"
-replace id ="DID NOT FINISH LOLAS" if PID==42 & Store=="Lolas" //per Gorilla data, rejected - timed out
+replace id ="placeholder" if PID==42 & Store=="Lolas" //per Gorilla data, rejected - timed out
 
 replace id="kjgcudgk" if PID==73 & Store=="Lolas" //from Gorilla data and Participant Tracker, this id should belong to PID 73 based on when they completed Lolas Visit 1. Unclear why missing from Qualtrics - wrong link might have been sent that didn't capture PID from URL. 
 
