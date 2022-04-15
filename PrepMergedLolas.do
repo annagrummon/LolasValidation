@@ -6,7 +6,6 @@
 cd "$Data/IntermediateData"
 use "LolasPurchases_all_coded.dta", clear
 
-
 *Drop Summary actions - not needed b/c we will derive total spending. 
 
 *First, retain total time taken by expanding this value across all rows for an id
@@ -17,8 +16,15 @@ drop TotalTimeTaken
 *Now drop Summary actions
 drop if Action=="Summary"
 
+******
+*Append Lola's purchase data from PID 42, which was captured with screenshots and hand-entered
+******
+
+append using "$Data/IntermediateData/LolasPurchases_PID42_coded.dta"
+drop W
+
 *For each row, create a variable for total spent on each item = q * p
-gen Spending=TotalPrice*Quantity 
+gen double Spending=TotalPrice*Quantity 
 assert Spending==TotalPrice*Quantity 
 
 *For each row, assign spending to a category
@@ -52,6 +58,7 @@ drop EventIndex UTCTimestamp ParticipantPublicID Action Category Product Quantit
 foreach v in SpendBread_ttl SpendCereal_ttl SpendDairy_ttl SpendEggs_ttl SpendEntrees_ttl SpendFruitVeg_ttl SpendMeatSeafood_ttl SpendNonSSBs_ttl SpendSaltySnacks_ttl SpendSauces_ttl SpendSSBs_ttl SpendSweets_ttl SpendOther_ttl SpendNuts_ttl SpendPastaRice_ttl SpendAll_ttl SpendBread_prop SpendCereal_prop SpendDairy_prop SpendEggs_prop SpendEntrees_prop SpendFruitVeg_prop SpendMeatSeafood_prop SpendNonSSBs_prop SpendSaltySnacks_prop SpendSauces_prop SpendSSBs_prop SpendSweets_prop SpendOther_prop SpendNuts_prop SpendPastaRice_prop {
 	rename `v' `v'Lolas
 }
+
 
 cd "$Data/IntermediateData"
 save "LolasPurchases_all_clean.dta", replace
