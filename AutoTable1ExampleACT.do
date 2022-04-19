@@ -116,10 +116,10 @@ forval x=1/5 {
 ******************
 
 *Remove the output file. Include "capture" so the command runs even if this file doesn't exist. 
-	capture rm "$Results/AutoTable1.xlsx"
+	capture rm "$Results/AutoTable1ACT.xlsx"
 		
 *Set filename for our Sample Characteristics table
-	putexcel set "$Results/AutoTable1.xlsx" , replace
+	putexcel set "$Results/AutoTable1ACT.xlsx" , replace
 	
 *Add column headers. Make them bold
 	putexcel A1=("Characteristic"), bold
@@ -131,44 +131,47 @@ forval x=1/5 {
 	putexcel A2 = ("Gas mileage in MPG, mean (SD)")
 
 	*To do: finish rest of row labels
-	
+	putexcel A3 = ("Price, mean (SD)")
+	putexcel A4 = ("Number of Repairs, proportion (N)")
+	putexcel A5 =("1")
+	putexcel A6 =("2")
+	putexcel A7 =("3")
+	putexcel A8 =("4")
+	putexcel A9 =("5")
+	putexcel A10 = ("Domestic, proportion (N)")
+	putexcel A11 = ("Foreign, proportion (N)")
 	
 *Add statistics to table
 	*Example 1: MPG mean in cell B2 
 	*Format to be a number with two significant digits.
 	putexcel B2 = matrix(mpg_mean), nformat(#.#0)
-		
+	
 	*And MPG SD in cell C2
 	*Format to be a number with two sig digits and to be in parentheses
 	putexcel C2 = matrix(mpg_sd), nformat("(#.#0)")
+	putexcel B3 = matrix(price_mean), nformat(#.#0)
+	putexcel C3 = matrix(price_sd), nformat("(#.#0)")
+	putexcel B5 = matrix(rep78_prop_1), nformat(##%)
+	putexcel C5 = matrix(rep78_n_1), nformat("(##)")
+	putexcel B6 = matrix(rep78_prop_2), nformat(##%)
+	putexcel C6 = matrix(rep78_n_2),  nformat("(##)")
+	putexcel B7 = matrix(rep78_prop_3), nformat(##%)
+	putexcel C7 = matrix(rep78_n_3),  nformat("(##)")
+	putexcel B8 = matrix(rep78_prop_4), nformat(##%)
+	putexcel C8 = matrix(rep78_n_4),  nformat("(##)")
+	putexcel B9 = matrix(rep78_prop_5), nformat(##%)
+	putexcel C9 = matrix(rep78_n_5),  nformat("(##)")
+	putexcel B10 = matrix(foreign_prop_0),	nformat(##%)
+	putexcel C10 = matrix(foreign_n_0),	nformat("(##)")
+	putexcel B11 = matrix(foreign_prop_1),	nformat(##%)
+	putexcel C11 = matrix(foreign_n_1),	nformat("(##)")
 	
 	
 	
 	
 	************************************
 	*To do: Add price results
-	************************************
-	
-	
-	
-	
-
-	*Example 2: Repair history
-		*Proportions - format as %s
-		putexcel B5 = matrix(rep78_prop_1), nformat(##%)
-		putexcel B6 = matrix(rep78_prop_2), nformat(##%)
-		putexcel B7 = matrix(rep78_prop_3), nformat(##%)
-		putexcel B8 = matrix(rep78_prop_4), nformat(##%)
-		putexcel B9 = matrix(rep78_prop_5), nformat(##%)
-		
-		*N's - format with ()
-		putexcel C5 = matrix(rep78_n_1), nformat("(##)")
-		putexcel C6 = matrix(rep78_n_2),  nformat("(##)")
-		putexcel C7 = matrix(rep78_n_3),  nformat("(##)")
-		putexcel C8 = matrix(rep78_n_4),  nformat("(##)")
-		putexcel C9 = matrix(rep78_n_5),  nformat("(##)")
-		
-		
+	************************************		
 		
 		
 		
