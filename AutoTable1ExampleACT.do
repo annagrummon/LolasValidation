@@ -20,7 +20,13 @@ codebook *
 	************************************************
 	*To do: Mean and SD of price
 	************************************************
+	sum price //summarize mpg 
+	mat price_mean = r(mean) //store a matrix called "price_mean" that contains the mean of price
+	mat price_sd = r(sd) //store a matrix called "price_sd" that contains the SD of price
 	
+		*Let's check that worked
+		matlist price_mean //This will display the matrix called mpg_mean 
+		matlist price_sd
 	
 	
 	*Example 2: % and N of number of repairs
@@ -92,10 +98,18 @@ forval x=1/5 {
 	
 	*Count number of observations that are domestic (foreign==0) and store as a matrix
 	count if foreign==0
-	matrix foreign_total_0=r(N)
+	matrix foreign_n_0=r(N)
 	
 	*Now your turn: count the number of observations that are foreign (foreign==1) and store...
 	
+	count if foreign==1
+	matrix foreign_n_1=r(N)
+	
+	mat foreign_prop_0 = foreign_n_0[1,1] / foreign_totaln[1,1]
+	mat foreign_prop_1 = foreign_n_1[1,1] / foreign_totaln[1,1]
+
+	matlist foreign_prop_0 
+	matlist foreign_prop_1
 	
 ******************
 *Export to Excel
