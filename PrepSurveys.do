@@ -199,6 +199,9 @@ replace age_cat = 2 if inrange(age_main, 30, 39)
 replace age_cat = 3 if inrange(age_main, 40, 49)
 replace age_cat = 4 if age_main>=50 & age_main!=.
 
+label define age_cat 1 "18-29 years" 2 "30-39 years" 3 "40-49 years" 4 "50+ years"
+label values age_cat age_cat
+
 *Gender
 label define gender 1 "Woman" 2 "Man" 3 "Non-binary" 4 "Prefer to self-describe"
 label values gender gender
