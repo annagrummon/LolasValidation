@@ -51,6 +51,8 @@ else if "`c(username)'"=="act3242"  {
 	
 	do "$Code/PrepSurveys.do"
 	
+	do "$Code/Labels.do"
+	
 	do "$Code/PrepAllValidation.do"
 
 

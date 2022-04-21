@@ -2,7 +2,7 @@
 
 *Start by bringing in Survey Data 
 cd "$Data/IntermediateData"
-use "Survey_all_clean.dta", clear
+use "Survey_all_labeled.dta", clear
 
 *Tk remove this code eventually or keep just 1 instance. Right now two missing ids are people with only Walmart surveys, still following up on this issue
 drop if id==""
