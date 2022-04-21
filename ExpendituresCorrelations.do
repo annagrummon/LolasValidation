@@ -56,7 +56,14 @@ foreach catg in $catglist {
 }
 
 *Output to excel
-	foreach category in 
+local row = 2
+	foreach category in $catglist {
+		putexcel A`row' = ("`catg'")
+		putexcel 
+		
+		local `row'=row+1
+		
+	}
 	putexcel C2 = matrix(mpg_sd), nformat("(#.#0)")
 	
 	putexcel B3 = matrix(price_mean), nformat(#.#0)
