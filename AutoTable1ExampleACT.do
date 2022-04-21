@@ -90,7 +90,7 @@ forval x=1/5 {
 	
 	*Let's take a look at this variable
 	tab foreign 
-	tab foreign, no lable //show the numeric variables not the labels
+	tab foreign, nolabel //show the numeric variables not the labels
 	
 	*Let's get you started. First, count total observations that are non-missing for foreign and store
 	count if foreign !=.
