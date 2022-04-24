@@ -47,6 +47,31 @@ codebook *
 		mat gender_cat_prop`gender' = gender_cat_n`gender'[1,1] / gender_cat_totaln[1,1]
 	}
 	
+*Latino(a)
+	*Count non-missing observations
+	count if latino!=.
+	mat latino_totaln = r(N)
+	
+	*Count number Latino
+	count if latino==1
+	mat latino_n1 = r(N)
+	
+	*Calculate proportion Latino
+	mat latino_prop1 = latino_n1[1,1] / latino_totaln[1,1]
+	
+*Income<200% FPL
+	*Count non-missing observations
+	count if fpl200!=.
+	mat fpl200_totaln = r(N)
+	
+	*Count number Latino
+	count if fpl200==1
+	mat fpl200_n1 = r(N)
+	
+	*Calculate proportion Latino
+	mat fpl200_prop1 = fpl200_n1[1,1] / fpl200_totaln[1,1]
+	
+*TO DO: Finish rest of calculations for remaining demographics and store
 	
 /*syntax for foreach loops
 	foreach nameoflocalvariable in list of things to loop over {
@@ -91,6 +116,10 @@ codebook *
 	putexcel A6 = ("50 years or older")
 
 	*To do: finish rest of row labels
+	putexcel A11=("Latino(a) or Hispanic")
+	
+	
+	putexcel A28=("Household income <200% FPL")
 	
 	
 *Add statistics to table
@@ -111,10 +140,20 @@ codebook *
 	putexcel B8 = matrix(gender_cat_prop1), nformat(##%)
 	putexcel C8 = matrix(gender_cat_n1), nformat(##)
 	
+	*Latino or Hispanic
+	putexcel B11 = matrix(latino_prop1), nformat(##%)
+	putexcel C11 = matrix(latino_n1), nformat(##)
 	
 	**ANNA CLAIRE ADD OUTPUT FOR RACE, EDUC, INCOM
 	***
 	***
 	
+		
 	***VIOLET ADD OUTPUT FOR BUDGET, HH SIZE, NUMBER OF CHILDREN
+	*Note that Anna added income<200% FPL below
+	
+	
+	*Income less than 200% FPL
+	putexcel B28=matrix(fpl200_prop1), nformat(##%)
+	putexcel C28=matrix(fpl200_n1), nformat(##)
 	
