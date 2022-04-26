@@ -114,7 +114,41 @@ codebook *
 	putexcel A4 = ("30-39 years")
 	putexcel A5 = ("40-49 years")
 	putexcel A6 = ("50 years or older")
-
+    putexcel A7 = ("Gender")
+    putexcel A8 = ("Female")
+    putexcel A9 = ("Male")
+	putexcel A10 = ("Non-binary or another gender")
+	putexcel A12 = ("Race")
+	putexcel A13 = ("White")
+	putexcel A14 = ("Black or African American")
+	putexcel A15 = ("American Indian or Alaska Native")
+	putexcel A16 = ("Asian or Pacific Islander")	
+	putexcel A17 = ("Other or Multiracial")
+	putexcel A18 = ("Education")
+	putexcel A19 = ("High school diploma or less")
+	putexcel A20 = ("Some college")
+	putexcel A21 = ("College graduate or associates degree")
+	putexcel A22 = ("Graduate degree")
+	putexcel A23 = ("Household  income, annual")
+	putexcel A24 = ("$0 to $24,999")
+	putexcel A25 = ("$25,000 to $49,999")
+	putexcel A26 = ("$50,000 to $99,999")
+	putexcel A27 = ("$100,000 or more")
+	putexcel A29 = ("Usual weekly grocery budget")
+	putexcel A30 = ("$100 or less")
+	putexcel A31 = ("$101 to $150")
+	putexcel A32 = ("$151 to $200")
+	putexcel A33 = ("$201 or more")
+	putexcel A34 = ("Household size")
+	putexcel A35 = ("1")
+	putexcel A36 = ("2")
+	putexcel A37 = ("3")
+	putexcel A38 = ("4 or more")
+	putexcel A39 = ("Number of children")
+	putexcel A40 = ("0")
+	putexcel A41 = ("1")
+	putexcel A42 = ("2")
+	putexcel A43 = ("3 or more")
 	*To do: finish rest of row labels
 	putexcel A11=("Latino(a) or Hispanic")
 	
@@ -139,6 +173,10 @@ codebook *
 	*Gender
 	putexcel B8 = matrix(gender_cat_prop1), nformat(##%)
 	putexcel C8 = matrix(gender_cat_n1), nformat(##)
+	putexcel B9 = matrix(gender_cat_prop2), nformat(##%)
+	putexcel C9 = matrix(gender_cat_n2), nformat(##)
+	putexcel B10 = matrix(gender_cat_prop3), nformat(##%)
+	putexcel C10 = matrix(gender_cat_n3), nformat(##)
 	
 	*Latino or Hispanic
 	putexcel B11 = matrix(latino_prop1), nformat(##%)
@@ -152,6 +190,68 @@ codebook *
 	***VIOLET ADD OUTPUT FOR BUDGET, HH SIZE, NUMBER OF CHILDREN
 	*Note that Anna added income<200% FPL below
 	
+	count if budget_cat!=. 
+	mat budget_cat_totaln = r(N)
+	tab budget_cat, nolabel
+	foreach budget in 1 2 3 4 {
+	count if budget_cat==`budget'
+	mat budget_cat_n`budget' = r(N)
+	mat budget_cat_prop`budget' = budget_cat_n`budget'[1,1] / budget_cat_totaln[1,1]
+	}
+	
+	count if hhsize_cat!=. 
+	mat hhsize_cat_totaln = r(N)
+	tab hhsize_cat
+	foreach hhsize in 1 2 3 4 {
+	count if hhsize_cat==`hhsize'
+	mat hhsize_cat_n`hhsize' = r(N)
+	mat hhsize_cat_prop`hhsize' = hhsize_cat_n`hhsize'[1,1] / hhsize_cat_totaln[1,1]
+	}
+	
+	count if children_cat!=. 
+	mat children_cat_totaln = r(N)
+	tab children_cat
+	foreach children in 1 2 3 4 {
+	count if children_cat==`children'
+	mat children_cat_n`children' = r(N)
+	mat children_cat_prop`children' = children_cat_n`children'[1,1] / children_cat_totaln[1,1]
+	}
+	
+	putexcel B30 = matrix(budget_cat_prop1), nformat(##%)
+	putexcel C30 = matrix(budget_cat_n1), nformat(##)
+	
+	putexcel B31 = matrix(budget_cat_prop2), nformat(##%)
+	putexcel C31 = matrix(budget_cat_n2), nformat(##)
+	
+	putexcel B32 = matrix(budget_cat_prop3), nformat(##%)
+	putexcel C32 = matrix(budget_cat_n3), nformat(##)
+	
+	putexcel B33 = matrix(budget_cat_prop4), nformat(##%)
+	putexcel C33 = matrix(budget_cat_n4), nformat(##)
+	
+	putexcel B35 = matrix(hhsize_cat_prop1), nformat(##%)
+	putexcel C35 = matrix(hhsize_cat_n1), nformat(##)
+	
+	putexcel B36 = matrix(hhsize_cat_prop2), nformat(##%)
+	putexcel C36 = matrix(hhsize_cat_n2), nformat(##)
+	
+	putexcel B37 = matrix(hhsize_cat_prop3), nformat(##%)
+	putexcel C37 = matrix(hhsize_cat_n3), nformat(##)
+	
+	putexcel B38 = matrix(hhsize_cat_prop4), nformat(##%)
+	putexcel C38 = matrix(hhsize_cat_n4), nformat(##)
+	
+	putexcel B40 = matrix(children_cat_prop1), nformat(##%)
+	putexcel C40 = matrix(children_cat_n1), nformat(##)
+	
+	putexcel B41 = matrix(children_cat_prop2), nformat(##%)
+	putexcel C41 = matrix(children_cat_n2), nformat(##)
+	
+	putexcel B42 = matrix(children_cat_prop3), nformat(##%)
+	putexcel C42 = matrix(children_cat_n3), nformat(##)
+	
+	putexcel B43 = matrix(children_cat_prop4), nformat(##%)
+	putexcel C43 = matrix(children_cat_n4), nformat(##)
 	
 	*Income less than 200% FPL
 	putexcel B28=matrix(fpl200_prop1), nformat(##%)
