@@ -11,7 +11,7 @@ drop if exclude_all==1
 
 *Calculate total consumption per week
 egen ttlssbs = rowtotal(soda energy sports fruitdrink swtteacoff), missing
-egen nonssbs = rowtotal(dietsoda dietenergy dietsports water fj100 teacoff), missing
+egen ttlnonssbs = rowtotal(dietsoda dietenergy dietsports water fj100 teacoff), missing
 
 *Excludes fried potatoes
 egen ttlfv = rowtotal(fruit veg nonfriedpot otherveg), missing
