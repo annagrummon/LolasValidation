@@ -5,7 +5,7 @@ cd "$Data"
 use "ValidationData_all.dta", clear
 
 *Drop folks who we are excluding from all analyses
-drop if exclude_all==1
+drop if exclude_sens==1
 
 global catglist Bread Cereal Dairy Eggs Entrees FruitVeg NonSSBs MeatSeafood Nuts PastaRice SaltySnacks Sauces Sweets SSBs Other 
 
@@ -62,8 +62,8 @@ foreach catg in $catglist {
 *********************
 
 *Set the file
-capture rm "$Results/ExpendituresCorrelations.xlsx"
-putexcel set "$Results/ExpendituresCorrelations.xlsx", replace 
+capture rm "$Results/ExpendituresCorrelations_sens.xlsx"
+putexcel set "$Results/ExpendituresCorrelations_sens.xlsx", replace 
 
 *Add column headers
 putexcel A2=("Category")
