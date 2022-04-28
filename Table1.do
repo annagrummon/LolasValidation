@@ -71,6 +71,7 @@ codebook *
 	*Calculate proportion Latino
 	mat fpl200_prop1 = fpl200_n1[1,1] / fpl200_totaln[1,1]
 	
+	
 *TO DO: Finish rest of calculations for remaining demographics and store
 	
 /*syntax for foreach loops
@@ -182,11 +183,71 @@ codebook *
 	putexcel B11 = matrix(latino_prop1), nformat(##%)
 	putexcel C11 = matrix(latino_n1), nformat(##)
 	
-	**ANNA CLAIRE ADD OUTPUT FOR RACE, EDUC, INCOM
-	***
-	***
+**ANNA CLAIRE ADD OUTPUT FOR RACE, EDUC, INCOM
+
+*RACE
+	count if race_cat!=.
+	mat race_cat_totaln = r(N)
 	
-		
+	foreach race in 1 2 3 4 5 {
+	count if race_cat==`race'
+	mat race_cat_n`race' = r(N)
+	mat race_cat_prop`race' = race_cat_n`race'[1,1] / race_cat_totaln[1,1]
+	}
+	
+	
+*EDUC
+	count if educ_cat!=.
+	mat educ_cat_totaln = r(N)
+	
+	foreach educ in 1 2 3 4 {
+	count if educ_cat==`educ'
+	mat educ_cat_n`educ' = r(N)
+	mat educ_cat_prop`educ' = educ_cat_n`educ'[1,1] / educ_cat_totaln[1,1]
+	}
+	
+*INCOM
+	count if income_4cat!=.
+	mat incom_cat_totaln = r(N)
+	
+	foreach incom in 1 2 3 4 {
+	count if income_4cat==`incom'
+	mat incom_cat_n`incom' = r(N)
+	mat incom_cat_prop`incom' = incom_cat_n`incom'[1,1] / incom_cat_totaln[1,1]
+	}
+	
+	*Race
+	putexcel B13 = matrix(race_cat_prop1), nformat(##%)
+	putexcel C13 = matrix(race_cat_n1), nformat(##)
+	putexcel B14 = matrix(race_cat_prop2), nformat(##%)
+	putexcel C14 = matrix(race_cat_n2), nformat(##)
+	putexcel B15 = matrix(race_cat_prop3), nformat(##%)
+	putexcel C15 = matrix(race_cat_n3), nformat(##)
+	putexcel B16 = matrix(race_cat_prop4), nformat(##%)
+	putexcel C16 = matrix(race_cat_n4), nformat(##)
+	putexcel B17 = matrix(race_cat_prop5), nformat(##%)
+	putexcel C17 = matrix(race_cat_n5), nformat(##)
+	
+	*Education
+	putexcel B19 = matrix(educ_cat_prop1), nformat(##%)
+	putexcel C19 = matrix(educ_cat_n1), nformat(##)
+	putexcel B20 = matrix(educ_cat_prop2), nformat(##%)
+	putexcel C20 = matrix(educ_cat_n2), nformat(##)
+	putexcel B21 = matrix(educ_cat_prop3), nformat(##%)
+	putexcel C21 = matrix(educ_cat_n3), nformat(##)
+	putexcel B22 = matrix(educ_cat_prop4), nformat(##%)
+	putexcel C22 = matrix(educ_cat_n4), nformat(##)		
+	
+	*Income
+	putexcel B24 = matrix(incom_cat_prop1), nformat(##%)
+	putexcel C24 = matrix(incom_cat_n1), nformat(##)
+	putexcel B25 = matrix(incom_cat_prop2), nformat(##%)
+	putexcel C25 = matrix(incom_cat_n2), nformat(##)
+	putexcel B26 = matrix(incom_cat_prop3), nformat(##%)
+	putexcel C26 = matrix(incom_cat_n3), nformat(##)
+	putexcel B27 = matrix(incom_cat_prop4), nformat(##%)
+	putexcel C27 = matrix(incom_cat_n4), nformat(##)	
+	
 	***VIOLET ADD OUTPUT FOR BUDGET, HH SIZE, NUMBER OF CHILDREN
 	*Note that Anna added income<200% FPL below
 	
