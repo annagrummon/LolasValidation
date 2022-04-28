@@ -33,15 +33,15 @@ foreach catg in $catglist {
 	foreach store in Lolas Walmart {
 		*Median
 		_pctile Spend`catg'_prop`store', p(50)
-		mat Spend`catg'propp50`store'=r(r1)
+		mat Spend`catg'prop50`store'=r(r1)
 		
 		*p25
 		_pctile Spend`catg'_prop`store', p(25)
-		mat Spend`catg'propp25`store'=r(r1)
+		mat Spend`catg'prop25`store'=r(r1)
 		
 		*p75
 		_pctile Spend`catg'_prop`store', p(75)
-		mat Spend`catg'propp75`store'=r(r1)
+		mat Spend`catg'prop75`store'=r(r1)
 	}
 }
 
@@ -55,17 +55,46 @@ foreach catg in $catglist {
 	
 }
 
+
+
+*********************
 *Output to excel
-local row = 2
-	foreach category in $catglist {
+*********************
+
+*Set the file
+capture rm "$Results/ExpendituresCorrelations.xlsx"
+putexcel set "$Results/ExpendituresCorrelations.xlsx", replace 
+
+*Add column headers
+putexcel A2=("Category")
+putexcel B1=("Lola's")
+putexcel B2=("Median")
+putexcel C2=("p25")
+putexcel D2=("p75")
+putexcel E1=("Walmart")
+putexcel E2=("Median")
+putexcel F2=("p25")
+putexcel G2=("p75")
+putexcel H2=("Spearman's rho")
+putexcel I2=("p-value")
+
+local row = 3
+	foreach catg in $catglist {
 		putexcel A`row' = ("`catg'")
-		putexcel 
+		putexcel B`row' =matrix(Spend`catg'prop50Lolas), nformat(0.0%)
+		putexcel C`row' =matrix(Spend`catg'prop25Lolas), nformat("(0.0%")
+		putexcel D`row' =matrix(Spend`catg'prop75Lolas), nformat(", 0.0%)")
 		
-		local `row'=row+1
+		putexcel E`row' =matrix(Spend`catg'prop50Walmart), nformat(0.0%)
+		putexcel F`row' =matrix(Spend`catg'prop25Walmart), nformat("(0.0%")
+		putexcel G`row' =matrix(Spend`catg'prop75Walmart), nformat(", 0.0%)")
 		
-	}
-	putexcel C2 = matrix(mpg_sd), nformat("(#.#0)")
+		
+		putexcel H`row'=matrix(`catg'_rho), nformat(#.#0)
+		putexcel I`row'=matrix(`catg'_p), nformat(0.#00)
+		
+		local ++row
 	
-	putexcel B3 = matrix(price_mean), nformat(#.#0)
-	putexcel C3 = matrix(price_sd), nformat("(#.#0)")
+	}
+
 	
