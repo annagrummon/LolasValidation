@@ -12,7 +12,7 @@ global catglist Bread Cereal Dairy Eggs Entrees FruitVeg NonSSBs MeatSeafood Nut
 *Rescale all ttl variables to be in dollars not cents
 foreach catg in $catglist {
 	foreach store in Lolas Walmart {
-		gen Spend`catg'_ttl`store'_dollars = Spend`catg'_ttl`store'/100
+		gen Spend`catg'_ttl`store'_usd = Spend`catg'_ttl`store'/100
 	}
 }
 
@@ -20,7 +20,7 @@ foreach catg in $catglist {
 foreach catg in $catglist {
 	foreach store in Lolas Walmart {
 		*Mean and SD
-		sum Spend`catg'_ttl`store'_dollars
+		sum Spend`catg'_ttl`store'_usd
 		mat Spend`catg'ttlmean`store'=r(mean)
 		mat Spend`catg'ttlsd`store'=r(sd)
 	}
@@ -59,8 +59,8 @@ local row = 3
 		putexcel B`row' =matrix(Spend`catg'ttlmeanLolas), nformat(#.#0)
 		putexcel C`row' =matrix(Spend`catg'ttlsdLolas), nformat("(#.#0)")
 		
-		putexcel D`row' =matrix(Spend`catg'ttlmeanLolas), nformat(#.#0)
-		putexcel E`row' =matrix(Spend`catg'ttlsdLolas), nformat("(#.#0)")
+		putexcel D`row' =matrix(Spend`catg'ttlmeanWalmart), nformat(#.#0)
+		putexcel E`row' =matrix(Spend`catg'ttlsdWalmart), nformat("(#.#0)")
 		
 		putexcel F`row'=matrix(`catg'_rho), nformat(#.#0)
 		putexcel G`row'=matrix(`catg'_p), nformat(0.#00)
