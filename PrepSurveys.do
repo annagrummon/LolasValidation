@@ -119,7 +119,6 @@ gen find_list_agree = .
 	replace find_list_agree =1 if inrange(find_list, 3,5)
 	replace find_list_agree =0 if inrange(find_list, 1,2)
 	
-	
 *Difficulties in store - replace missing as 0 (not checked)
 forval x=1/13 {
 	replace difficult_`x'=0 if difficult_`x'==.

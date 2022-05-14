@@ -64,15 +64,102 @@ codebook *
 	count if fpl200!=.
 	mat fpl200_totaln = r(N)
 	
-	*Count number Latino
+	*Count number 
 	count if fpl200==1
 	mat fpl200_n1 = r(N)
 	
-	*Calculate proportion Latino
+	*Calculate proportion 
 	mat fpl200_prop1 = fpl200_n1[1,1] / fpl200_totaln[1,1]
 	
+*RACE
+	count if race_cat!=.
+	mat race_cat_totaln = r(N)
 	
-*TO DO: Finish rest of calculations for remaining demographics and store
+	foreach race in 1 2 3 4 5 {
+	count if race_cat==`race'
+	mat race_cat_n`race' = r(N)
+	mat race_cat_prop`race' = race_cat_n`race'[1,1] / race_cat_totaln[1,1]
+	}
+	
+	
+*EDUC
+	count if educ_cat!=.
+	mat educ_cat_totaln = r(N)
+	
+	foreach educ in 1 2 3 4 {
+	count if educ_cat==`educ'
+	mat educ_cat_n`educ' = r(N)
+	mat educ_cat_prop`educ' = educ_cat_n`educ'[1,1] / educ_cat_totaln[1,1]
+	}
+	
+*INCOME - 4 level
+	count if income_4cat!=.
+	mat incom_cat_totaln = r(N)
+	
+	foreach incom in 1 2 3 4 {
+	count if income_4cat==`incom'
+	mat incom_cat_n`incom' = r(N)
+	mat incom_cat_prop`incom' = incom_cat_n`incom'[1,1] / incom_cat_totaln[1,1]
+	}
+		
+	
+*Grocery budget category
+	count if budget_cat!=. 
+	mat budget_cat_totaln = r(N)
+	tab budget_cat, nolabel
+	foreach budget in 1 2 3 4 {
+	count if budget_cat==`budget'
+	mat budget_cat_n`budget' = r(N)
+	mat budget_cat_prop`budget' = budget_cat_n`budget'[1,1] / budget_cat_totaln[1,1]
+	}
+	
+*HH size
+	count if hhsize_cat!=. 
+	mat hhsize_cat_totaln = r(N)
+	tab hhsize_cat
+	foreach hhsize in 1 2 3 4 {
+	count if hhsize_cat==`hhsize'
+	mat hhsize_cat_n`hhsize' = r(N)
+	mat hhsize_cat_prop`hhsize' = hhsize_cat_n`hhsize'[1,1] / hhsize_cat_totaln[1,1]
+	}
+	
+*Number of children
+	count if children_cat!=. 
+	mat children_cat_totaln = r(N)
+	tab children_cat
+	foreach children in 1 2 3 4 {
+	count if children_cat==`children'
+	mat children_cat_n`children' = r(N)
+	mat children_cat_prop`children' = children_cat_n`children'[1,1] / children_cat_totaln[1,1]
+	}
+	
+*Frequency of online grocery shopping
+	count if frequency!=. 
+	mat frequency_totaln = r(N)
+	tab frequency
+	foreach freq in 1 2 3 4 {
+	count if frequency==`freq'
+	mat frequency_n`freq' = r(N)
+	mat frequency_prop`freq' = frequency_n`freq'[1,1] / frequency_totaln[1,1]
+	}
+	
+*Amount of household's shopping done by participant
+	//combine bottom 3 levels b/c small cells
+	count if hhld_shop!=.
+	mat hhld_shop_totaln=r(N)
+	
+	count if hhld_shop==1 | hhld_shop==2 | hhld_shop==3
+	mat hhld_shop_n123=r(N)
+	
+	count if hhld_shop==4
+	mat hhld_shop_n4=r(N)
+	
+	count if hhld_shop==5
+	mat hhld_shop_n5=r(N)
+	
+	foreach value in 123 4 5 {
+		mat hhld_shop_prop`value'=hhld_shop_n`value'[1,1] / hhld_shop_totaln[1,1]
+	}
 	
 /*syntax for foreach loops
 	foreach nameoflocalvariable in list of things to loop over {
@@ -119,6 +206,7 @@ codebook *
     putexcel A8 = ("Female")
     putexcel A9 = ("Male")
 	putexcel A10 = ("Non-binary or another gender")
+	putexcel A11=("Latino(a) or Hispanic")
 	putexcel A12 = ("Race")
 	putexcel A13 = ("White")
 	putexcel A14 = ("Black or African American")
@@ -135,6 +223,7 @@ codebook *
 	putexcel A25 = ("$25,000 to $49,999")
 	putexcel A26 = ("$50,000 to $99,999")
 	putexcel A27 = ("$100,000 or more")
+	putexcel A28=("Household income <200% FPL")
 	putexcel A29 = ("Usual weekly grocery budget")
 	putexcel A30 = ("$100 or less")
 	putexcel A31 = ("$101 to $150")
@@ -150,11 +239,18 @@ codebook *
 	putexcel A41 = ("1")
 	putexcel A42 = ("2")
 	putexcel A43 = ("3 or more")
-	*To do: finish rest of row labels
-	putexcel A11=("Latino(a) or Hispanic")
+	putexcel A44 = ("Frequency of shopping for groceries online")
+	putexcel A45 = ("1 time per month or less")
+	putexcel A46 = ("2-3 times per month")
+	putexcel A47 = ("1 time per week")
+	putexcel A48 = ("More than 1 time per week")
+	putexcel A49 = ("Amount of household's shopping")
+	putexcel A50 = ("Half or less")
+	putexcel A51 = ("More than half")
+	putexcel A52 = ("All")
 	
 	
-	putexcel A28=("Household income <200% FPL")
+	
 	
 	
 *Add statistics to table
@@ -183,40 +279,8 @@ codebook *
 	putexcel B11 = matrix(latino_prop1), nformat(##%)
 	putexcel C11 = matrix(latino_n1), nformat(##)
 	
-**ANNA CLAIRE ADD OUTPUT FOR RACE, EDUC, INCOM
 
 *RACE
-	count if race_cat!=.
-	mat race_cat_totaln = r(N)
-	
-	foreach race in 1 2 3 4 5 {
-	count if race_cat==`race'
-	mat race_cat_n`race' = r(N)
-	mat race_cat_prop`race' = race_cat_n`race'[1,1] / race_cat_totaln[1,1]
-	}
-	
-	
-*EDUC
-	count if educ_cat!=.
-	mat educ_cat_totaln = r(N)
-	
-	foreach educ in 1 2 3 4 {
-	count if educ_cat==`educ'
-	mat educ_cat_n`educ' = r(N)
-	mat educ_cat_prop`educ' = educ_cat_n`educ'[1,1] / educ_cat_totaln[1,1]
-	}
-	
-*INCOM
-	count if income_4cat!=.
-	mat incom_cat_totaln = r(N)
-	
-	foreach incom in 1 2 3 4 {
-	count if income_4cat==`incom'
-	mat incom_cat_n`incom' = r(N)
-	mat incom_cat_prop`incom' = incom_cat_n`incom'[1,1] / incom_cat_totaln[1,1]
-	}
-	
-	*Race
 	putexcel B13 = matrix(race_cat_prop1), nformat(##%)
 	putexcel C13 = matrix(race_cat_n1), nformat(##)
 	putexcel B14 = matrix(race_cat_prop2), nformat(##%)
@@ -228,7 +292,7 @@ codebook *
 	putexcel B17 = matrix(race_cat_prop5), nformat(##%)
 	putexcel C17 = matrix(race_cat_n5), nformat(##)
 	
-	*Education
+*Education
 	putexcel B19 = matrix(educ_cat_prop1), nformat(##%)
 	putexcel C19 = matrix(educ_cat_n1), nformat(##)
 	putexcel B20 = matrix(educ_cat_prop2), nformat(##%)
@@ -247,74 +311,54 @@ codebook *
 	putexcel C26 = matrix(incom_cat_n3), nformat(##)
 	putexcel B27 = matrix(incom_cat_prop4), nformat(##%)
 	putexcel C27 = matrix(incom_cat_n4), nformat(##)	
-	
-	***VIOLET ADD OUTPUT FOR BUDGET, HH SIZE, NUMBER OF CHILDREN
-	*Note that Anna added income<200% FPL below
-	
-	count if budget_cat!=. 
-	mat budget_cat_totaln = r(N)
-	tab budget_cat, nolabel
-	foreach budget in 1 2 3 4 {
-	count if budget_cat==`budget'
-	mat budget_cat_n`budget' = r(N)
-	mat budget_cat_prop`budget' = budget_cat_n`budget'[1,1] / budget_cat_totaln[1,1]
-	}
-	
-	count if hhsize_cat!=. 
-	mat hhsize_cat_totaln = r(N)
-	tab hhsize_cat
-	foreach hhsize in 1 2 3 4 {
-	count if hhsize_cat==`hhsize'
-	mat hhsize_cat_n`hhsize' = r(N)
-	mat hhsize_cat_prop`hhsize' = hhsize_cat_n`hhsize'[1,1] / hhsize_cat_totaln[1,1]
-	}
-	
-	count if children_cat!=. 
-	mat children_cat_totaln = r(N)
-	tab children_cat
-	foreach children in 1 2 3 4 {
-	count if children_cat==`children'
-	mat children_cat_n`children' = r(N)
-	mat children_cat_prop`children' = children_cat_n`children'[1,1] / children_cat_totaln[1,1]
-	}
-	
-	putexcel B30 = matrix(budget_cat_prop1), nformat(##%)
-	putexcel C30 = matrix(budget_cat_n1), nformat(##)
-	
-	putexcel B31 = matrix(budget_cat_prop2), nformat(##%)
-	putexcel C31 = matrix(budget_cat_n2), nformat(##)
-	
-	putexcel B32 = matrix(budget_cat_prop3), nformat(##%)
-	putexcel C32 = matrix(budget_cat_n3), nformat(##)
-	
-	putexcel B33 = matrix(budget_cat_prop4), nformat(##%)
-	putexcel C33 = matrix(budget_cat_n4), nformat(##)
-	
-	putexcel B35 = matrix(hhsize_cat_prop1), nformat(##%)
-	putexcel C35 = matrix(hhsize_cat_n1), nformat(##)
-	
-	putexcel B36 = matrix(hhsize_cat_prop2), nformat(##%)
-	putexcel C36 = matrix(hhsize_cat_n2), nformat(##)
-	
-	putexcel B37 = matrix(hhsize_cat_prop3), nformat(##%)
-	putexcel C37 = matrix(hhsize_cat_n3), nformat(##)
-	
-	putexcel B38 = matrix(hhsize_cat_prop4), nformat(##%)
-	putexcel C38 = matrix(hhsize_cat_n4), nformat(##)
-	
-	putexcel B40 = matrix(children_cat_prop1), nformat(##%)
-	putexcel C40 = matrix(children_cat_n1), nformat(##)
-	
-	putexcel B41 = matrix(children_cat_prop2), nformat(##%)
-	putexcel C41 = matrix(children_cat_n2), nformat(##)
-	
-	putexcel B42 = matrix(children_cat_prop3), nformat(##%)
-	putexcel C42 = matrix(children_cat_n3), nformat(##)
-	
-	putexcel B43 = matrix(children_cat_prop4), nformat(##%)
-	putexcel C43 = matrix(children_cat_n4), nformat(##)
-	
+
 	*Income less than 200% FPL
 	putexcel B28=matrix(fpl200_prop1), nformat(##%)
 	putexcel C28=matrix(fpl200_n1), nformat(##)
 	
+	*Grocery budget
+	putexcel B30 = matrix(budget_cat_prop1), nformat(##%)
+	putexcel C30 = matrix(budget_cat_n1), nformat(##)
+	putexcel B31 = matrix(budget_cat_prop2), nformat(##%)
+	putexcel C31 = matrix(budget_cat_n2), nformat(##)
+	putexcel B32 = matrix(budget_cat_prop3), nformat(##%)
+	putexcel C32 = matrix(budget_cat_n3), nformat(##)
+	putexcel B33 = matrix(budget_cat_prop4), nformat(##%)
+	putexcel C33 = matrix(budget_cat_n4), nformat(##)
+
+	*HH Size
+	putexcel B35 = matrix(hhsize_cat_prop1), nformat(##%)
+	putexcel C35 = matrix(hhsize_cat_n1), nformat(##)
+	putexcel B36 = matrix(hhsize_cat_prop2), nformat(##%)
+	putexcel C36 = matrix(hhsize_cat_n2), nformat(##)
+	putexcel B37 = matrix(hhsize_cat_prop3), nformat(##%)
+	putexcel C37 = matrix(hhsize_cat_n3), nformat(##)
+	putexcel B38 = matrix(hhsize_cat_prop4), nformat(##%)
+	putexcel C38 = matrix(hhsize_cat_n4), nformat(##)
+	
+	*Number of children
+	putexcel B40 = matrix(children_cat_prop1), nformat(##%)
+	putexcel C40 = matrix(children_cat_n1), nformat(##)
+	putexcel B41 = matrix(children_cat_prop2), nformat(##%)
+	putexcel C41 = matrix(children_cat_n2), nformat(##)
+	putexcel B42 = matrix(children_cat_prop3), nformat(##%)
+	putexcel C42 = matrix(children_cat_n3), nformat(##)
+	putexcel B43 = matrix(children_cat_prop4), nformat(##%)
+	putexcel C43 = matrix(children_cat_n4), nformat(##)
+	
+
+	*Frequency of online grocery shopping
+	local row=45
+	forval level=1/4 {
+		putexcel B`row' = matrix(frequency_prop`level'), nformat(##%)
+		putexcel C`row' = matrix(frequency_n`level'), nformat(##)
+		local ++row
+	}
+	
+	*Amount of shopping
+	local row=50
+	foreach value in 123 4 5 {
+		putexcel B`row'=matrix(hhld_shop_prop`value'), nformat(##%)
+		putexcel C`row'=matrix(hhld_shop_n`value'), nformat(##)
+		local ++row
+	}
