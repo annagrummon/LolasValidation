@@ -28,8 +28,11 @@ else if "`c(username)'"=="act3242"  {
 	global Results "\\Client\C$\Users\annaclairetucker\Dropbox\LolasValidationStudy\Results"
 }
 
+global catglist_ordered Sweets Dairy Nuts Other Bread FruitVeg MeatSeafood Cereal SSBs Entrees Sauces NonSSBs Eggs PastaRice SaltySnacks 
 
+global catglist Bread Cereal Dairy Eggs Entrees FruitVeg NonSSBs MeatSeafood Nuts PastaRice SaltySnacks Sauces Sweets SSBs Other 
 
+/*
 *****************
 *Run do files in order to execute entire project
 *****************
