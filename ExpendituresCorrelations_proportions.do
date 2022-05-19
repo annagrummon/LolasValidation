@@ -7,11 +7,10 @@ use "ValidationData_all.dta", clear
 *Drop folks who we are excluding from all analyses
 drop if exclude_all==1
 
-global catglist Bread Cereal Dairy Eggs Entrees FruitVeg NonSSBs MeatSeafood Nuts PastaRice SaltySnacks Sauces Sweets SSBs Other 
 
 *Calculate median and IQR proportion of expenditures by category and store 
 
-foreach catg in $catglist {
+foreach catg in $catglist_ordered {
 	foreach store in Lolas Walmart {
 		*Median
 		_pctile Spend`catg'_prop`store', p(50)
@@ -61,7 +60,7 @@ putexcel H2=("Spearman's rho")
 putexcel I2=("p-value")
 
 local row = 3
-	foreach catg in $catglist {
+	foreach catg in $catglist_ordered {
 		putexcel A`row' = ("`catg'")
 		putexcel B`row' =matrix(Spend`catg'prop50Lolas), nformat(0.0%)
 		putexcel C`row' =matrix(Spend`catg'prop25Lolas), nformat("(0.0%")
