@@ -6,9 +6,17 @@ save "Survey_all_clean.dta", replace
 label define easy_use 1 "Very difficult" 2 "Difficult" 3 "Neither difficult nor easy" 4 "Easy" 5 "Very easy"
 label values easy_use* easy_use 
 
+*Collapsed version
+	label define easyagree 1 "easy or very easy" 0 "neither, difficulty or  very difficult"
+	label values easy_use_agreeL easy_use_agreeW easyagree
+
 *Found things on list
 label define find_list 1 "None" 2 "Some things" 3 "Most things" 4 "Almost everything" 5 "Everything"
 label values find_list* find_list
+
+*label values
+	label define agreelist 1 "most, almost everything, everything" 0 "none, some" 
+	label values find_list_agreeL find_list_agreeW agreelist 
 
 *List
 label variable find_list_agreeLolas "Most, almost, everything on list"
@@ -36,13 +44,19 @@ foreach store in Lolas Walmart {
 label define participate_again 1 "Definitely not willing" 2 "Probably not willing" 3 "Probably willing" 4 "Definitely willing"
 label values participate_again* participate_again
 
+*Label values
+	label define agree4pt 1 "definitely or probably willing" 0 "definitely or probably NOT willing"
+	label values participate_again_agreeL participate_again_agreeW agree4pt 
 	
 *Define agree/disagree label
 label define agreedisagree 1 "Strong disagree" 2 "Somewhat disagree" 3 "Neither agree nor disagree" 4 "Somewhat agree" 5 "Strongly agree"
 
 *Label all agree/disagree process evaluation items
-label values easily_find* enough* pick_similar* similar_usual* felt_real* agreedisagree
+label values easily_findL easily_findW enoughL enoughW pick_similarL pick_similarW similar_usualL similar_usualW felt_realL felt_realW agreedisagree
 
+*Label collapsed PE variables 
+	label define agree5pt 1 "Somewhat or strongly agree" 0 "Neither, somewhat or strongly disagree"
+	label values easily_find_agree* enough_agree* pick_similar_agree* similar_usual_agree* felt_real_agree* agree5pt 
 
 *Label categorical FFQ/BEVQ variables
 label define BEVQFFQ_cat 0 "<1 time/week" 1 "1 time/week" 2 "2-3 times/week" 5 "4-6 times/week" 7 "1 time/week" 14 "2 times/day" 21 "3+ times/week"
