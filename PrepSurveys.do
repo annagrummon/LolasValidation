@@ -114,10 +114,14 @@ replace id="kjgcudgk" if PID==73 & Store=="Lolas" //from Gorilla data and Partic
 gen easy_use_agree = .
 	replace easy_use_agree = 1 if inrange(easy_use, 4, 5)
 	replace easy_use_agree = 0 if inrange(easy_use, 1, 3)
+	
+	
 
 gen find_list_agree = .
 	replace find_list_agree =1 if inrange(find_list, 3,5)
 	replace find_list_agree =0 if inrange(find_list, 1,2)
+	
+	
 	
 *Difficulties in store - replace missing as 0 (not checked)
 forval x=1/13 {
@@ -129,13 +133,17 @@ forval x=1/13 {
 gen participate_again_agree = .
 	replace participate_again_agree=1 if inrange(participate_again, 3, 4)
 	replace participate_again_agree=0 if inrange(participate_again, 1, 2)
+	
+	
 
-*Dichotomous versions of agree/disagree variables
+*Dichotomous versions of agree/disagree variables - code as 1 if somewhat or strongly agree, and 0 otherwise
 foreach v in easily_find enough pick_similar similar_usual felt_real {
 	gen `v'_agree = .
 	replace `v'_agree= 1 if inrange(`v', 4,5)
-	replace `v'_agree=0 if inrange(`v', 1,3)
+	replace `v'_agree= 0 if inrange(`v', 1,3)
 }
+	
+
 
 *Create categorical FFQ/BEVQ variables in case we want to present in this way
 foreach foodbev in soda dietsoda energy dietenergy sports dietsports water fj100 fruitdrink swtteacoff teacoff fruit veg friedpot nonfriedpot otherveg {
