@@ -32,7 +32,7 @@ global catglist_ordered Sweets Dairy Nuts Other Bread FruitVeg MeatSeafood Cerea
 
 global catglist Bread Cereal Dairy Eggs Entrees FruitVeg NonSSBs MeatSeafood Nuts PastaRice SaltySnacks Sauces Sweets SSBs Other 
 
-/*
+
 *****************
 *Run do files in order to execute entire project
 *****************

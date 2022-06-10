@@ -29,7 +29,7 @@ foreach catg in $catglist_ordered {
 
 
 *Calculate Spearman's rho and pvalues by category
-foreach catg in $catglist {
+foreach catg in $catglist_ordered {
 	spearman Spend`catg'_propLolas Spend`catg'_propWalmart
 	mat `catg'_rho = r(rho)
 	mat `catg'_p = r(p)
