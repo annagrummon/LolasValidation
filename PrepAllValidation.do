@@ -4,9 +4,8 @@
 cd "$Data/IntermediateData"
 use "Survey_all_labeled.dta", clear
 
-*Tk remove this code eventually or keep just 1 instance. Right now two missing ids are people with only Walmart surveys, still following up on this issue
+*Drop if id variable is missing
 drop if id==""
-
 
 *Merge survey data with Lola's purchase data using id variable
 merge 1:1 id using "$Data/IntermediateData/LolasPurchases_all_clean.dta"
@@ -55,6 +54,8 @@ replace exclude_all_why = "Did not follow instructions" if PID==143
 replace exclude_all = 1 if PID==25
 replace exclude_all_why = "Lola's data not captured due to technical difficulties" if PID==25
 
+replace exclude_all = 1 if PID==146 
+replace exclude_all_why = "Lost to follow-up"
 
 
 *Define PIDs that should be excluded from sensitivity analyses

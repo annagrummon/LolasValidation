@@ -5,7 +5,7 @@
 
 
 *Import data from participant with missing data and save as .dta
-import excel "/Users/annagrummon/Dropbox/ongoing projects/LolasValidationStudy/Data/Lolas/Lolas Data for Missing Participant.xlsx", sheet("Sheet1") firstrow clear
+import excel "/Users/annagrummon/Dropbox/ongoing projects/LolasValidationStudy/Data/Lolas/Lolas Data for Missing Participant-PID42.xlsx", sheet("Sheet1") firstrow clear
 
 gen id = "placeholder"
 
