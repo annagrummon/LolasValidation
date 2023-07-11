@@ -6,9 +6,9 @@
 
 *Anna
 if "`c(username)'"=="anngrummon" | "`c(username)'" == "annagrummon"  {
-	global Results "/Users/annagrummon/Dropbox/ongoing projects/LolasValidationStudy/Results"	
-	global Code "/Users/annagrummon/Dropbox/ongoing projects/LolasValidation-Code"
-	global Data "/Users/annagrummon/Dropbox/ongoing projects/LolasValidationStudy/Data"
+	global Results "/Users/annagrummon/Library/CloudStorage/Dropbox/Completed Projects/LolasValidationStudy/Results"	
+	global Code "/Users/annagrummon/Library/CloudStorage/Dropbox/Completed Projects/LolasValidation-Code"
+	global Data "/Users/annagrummon/Library/CloudStorage/Dropbox/Completed Projects/LolasValidationStudy/Data"
 	global Overall "/Users/annagrummon/Harvard University/Harvard University/Harvard University" 
 }
 
